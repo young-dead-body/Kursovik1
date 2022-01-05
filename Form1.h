@@ -751,7 +751,9 @@ namespace Kursovik1 {
 		return(d);
 	}
 
-
+	/// <summary>
+	/// TAP-TAP
+	/// </summary>
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		masa->Rows->Clear();
 		masa->RowHeadersVisible = 0;
