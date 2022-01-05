@@ -71,6 +71,7 @@ namespace Kursovik1 {
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::Button^ button5;
 
+
 	protected:
 
 
@@ -362,12 +363,13 @@ namespace Kursovik1 {
 			// 
 			// panel1
 			// 
+			this->panel1->Controls->Add(this->button5);
 			this->panel1->Controls->Add(this->textBox4);
 			this->panel1->Controls->Add(this->textBox3);
 			this->panel1->Controls->Add(this->button3);
 			this->panel1->Location = System::Drawing::Point(44, 375);
 			this->panel1->Name = L"panel1";
-			this->panel1->Size = System::Drawing::Size(303, 58);
+			this->panel1->Size = System::Drawing::Size(440, 58);
 			this->panel1->TabIndex = 20;
 			// 
 			// textBox4
@@ -433,20 +435,18 @@ namespace Kursovik1 {
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(353, 378);
+			this->button5->Location = System::Drawing::Point(309, 3);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(131, 50);
-			this->button5->TabIndex = 25;
+			this->button5->TabIndex = 26;
 			this->button5->Text = L"Очистить вторую матрицу";
 			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1656, 448);
-			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
@@ -753,6 +753,7 @@ namespace Kursovik1 {
 
 
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		masa->Rows->Clear();
 		masa->RowHeadersVisible = 0;
 		masa->ColumnHeadersVisible = false;
 		int i, j, r1, c1, r2, c2;
