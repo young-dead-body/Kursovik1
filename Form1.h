@@ -68,6 +68,8 @@ namespace Kursovik1 {
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label7;
+	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ button5;
 
 	protected:
 
@@ -141,6 +143,8 @@ namespace Kursovik1 {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->masa))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->mas2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->mas1))->BeginInit();
@@ -348,7 +352,7 @@ namespace Kursovik1 {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(456, 351);
+			this->button1->Location = System::Drawing::Point(493, 355);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(262, 91);
 			this->button1->TabIndex = 0;
@@ -417,11 +421,33 @@ namespace Kursovik1 {
 			this->label7->TabIndex = 23;
 			this->label7->Text = L"Результат";
 			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(353, 294);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(131, 50);
+			this->button4->TabIndex = 24;
+			this->button4->Text = L"Очистить первую матрицу";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(353, 378);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(131, 50);
+			this->button5->TabIndex = 25;
+			this->button5->Text = L"Очистить вторую матрицу";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &Form1::button5_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1656, 448);
+			this->Controls->Add(this->button5);
+			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
@@ -445,6 +471,7 @@ namespace Kursovik1 {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Form1";
 			this->Text = L"Операции с матрицами";
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->masa))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->mas2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->mas1))->EndInit();
@@ -847,43 +874,56 @@ namespace Kursovik1 {
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 		mas1->RowHeadersVisible = 0;
 		mas1->ColumnHeadersVisible = false;
+		bool check = false;
 		try
 		{
 			mas1->RowCount = Convert::ToInt32(textBox1->Text);
+			check = true;
 		}
 		catch (System::Exception^)
 		{
 			MessageBox::Show("Вы совсем забыли про количество строк первой матрицы","Упс...");
+			check = false;
 		}
 		try
 		{
 			mas1->ColumnCount = Convert::ToInt32(textBox2->Text);
+			check = true;
 		}
 		catch (System::Exception^)
 		{
 			MessageBox::Show("Вы совсем забыли про количество столбцов первой матрицы", "Упс...");
+			check = false;
 		}
+		if(check)
+			button4->Visible = true;
 	}
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+		bool check = false;
 		mas2->RowHeadersVisible = 0;
 		mas2->ColumnHeadersVisible = false;
 		try
 		{
 			mas2->RowCount = Convert::ToInt32(textBox3->Text);
+			check = true;
 		}
 		catch (System::Exception^)
 		{
 			MessageBox::Show("Вы совсем забыли про количество строк второй матрицы", "Упс...");
+			check = false;
 		}
 		try
 		{
 			mas2->ColumnCount = Convert::ToInt32(textBox4->Text);
+			check = true;
 		}
 		catch (System::Exception^)
 		{
 			MessageBox::Show("Вы совсем забыли про количество столбцов второй матрицы", "Упс...");
+			check = false;
 		}
-		
+		if(check)
+			button5->Visible = true;
 	}
 
 
@@ -930,5 +970,17 @@ namespace Kursovik1 {
 		panel1->Visible = true;
 		label6->Visible = true;
 	}
-	};
+	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
+		mas1->Rows->Clear();
+		button4->Visible = false;
+	}
+	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e) {
+		mas2->Rows->Clear();
+		button5->Visible = false;
+	}
+	private: System::Void Form1_Load(System::Object^ sender, System::EventArgs^ e) {
+		button5->Visible = false;
+		button4->Visible = false;
+	}
+};
 }
